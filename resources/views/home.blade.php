@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="home">
     <x-slot name="heading">
         Home
     </x-slot>

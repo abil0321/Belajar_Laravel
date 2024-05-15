@@ -21,7 +21,17 @@ class UsersController extends Controller
 
         // $users = DB::table("users")->where('email', 'salsaabilmuhammad45@gmail.com')->first();
         // $users = DB::table("users")->where('email', 'like', '%@yahoo.com')->get();
-        $users = DB::table("users")->where('email', 'like', '%@gmail.com')->first();
+        // $users = DB::table("users")->where('email', 'like', '%@gmail.com')->first();
+
+        // $users = DB::table("users")
+        // ->where('email', 'like', '%@gmail.com')
+        // ->latest() // orderBy('id', 'desc')
+        // ->oldest() // orderBy('id', 'asc')
+        // ->first();
+
+        $users = DB::table("users")
+        ->where('id', 2) // find(2)
+        ->first();
 
         // return $users;
         // return $users->email;

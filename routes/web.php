@@ -19,7 +19,9 @@ Route::get('/galeri', [Controllers\GaleriController::class, 'index']);//->name("
 
 Route::get('/contact', [Controllers\ContactController::class, 'index']);//->name("welcome");
 
-Route::get('users', function () {
+Route::get('/users', [Controllers\UsersController::class,'index']);
+
+Route::get('users_statis', function () {
     $users = [
         ['id' => 1, 'name' => 'john doe', 'email' => 'johndoe@gmail.com'],
 

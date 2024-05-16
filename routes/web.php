@@ -21,7 +21,7 @@ Route::get('/contact', [Controllers\ContactController::class, 'index']);//->name
 
 Route::get('/users', [Controllers\UsersController::class,'index']);
 
-Route::get('users_statis', function () {
+Route::get('/users_statis', function () {
     $users = [
         ['id' => 1, 'name' => 'john doe', 'email' => 'johndoe@gmail.com'],
 

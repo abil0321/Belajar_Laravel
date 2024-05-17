@@ -13,7 +13,7 @@
             </x-slot>
         </x-section-title>
         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <x-button type="button">
+            <x-button as="a" href="/users/create" class="bg-red-500" type="button">
                 Add user
             </x-button>
         </div>

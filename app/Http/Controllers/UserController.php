@@ -7,7 +7,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\DB;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
@@ -46,5 +46,10 @@ class UsersController extends Controller
         return view("users.index", [
             "people" => $users
         ]);
+    }
+
+    public function create()
+    {
+        return view("users.create");
     }
 }

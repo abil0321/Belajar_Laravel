@@ -38,7 +38,6 @@ class UserController extends Controller
         // ->get();
 
         $users = User::query()
-        ->latest()
         ->get();
 
         // return view("users.index", compact("users"));
@@ -56,6 +55,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // dd($request->only('name', 'email', 'password'));
+        $request->validate([
+            'name' => ['required', 'min:3', 'max:255', 'string'],
+            'email'=> ['required', 'email'],
+            'password' => ['required', 'min:8']
+        ]);
         User::create($request->only('name', 'email', 'password'));
         return redirect('/users');
     }

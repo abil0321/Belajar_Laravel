@@ -41,7 +41,6 @@
                         <x-table.td>{{ $user->created_at->format('d M Y') }}</x-table.td>
                         <x-table.td>{{ $user->created_at->diffForHumans() }} </x-table.td>
                         <x-table.td>{{ (new \Carbon\Carbon($user->created_at))->format('d F Y') }}</x-table.td>
-
                     </tr>
                 @endforeach
             </x-table.tbody>

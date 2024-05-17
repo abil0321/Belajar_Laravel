@@ -6,6 +6,7 @@
     <br>
     <form action="/users" class="space-y-6" method="post">
         @csrf
+        @dump($errors)
         <div class="">
             <label for="name">Name </label>
             <input type="text" class="border px-4 py-2 rounded block mt-1" name="name" id="name">

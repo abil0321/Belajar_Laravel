@@ -22,6 +22,18 @@ Route::get('/contact', [Controllers\ContactController::class, 'index']);//->name
 Route::get('/users', [Controllers\UserController::class,'index']);
 
 Route::get('/users/create', [Controllers\UserController::class,'create']);
+Route::post('/users', [Controllers\UserController::class,'store']);
+
+// Route::get('/articles/create', function () {
+//     \App\Models\Article::create([
+//         'title' => $title = 'my first article',
+//         'slug' => str($title)->slug(),
+//         'body' => $body = 'This is the body of my firstarticles',
+//         'teaser' => $teaser = str($body)->limit(150),
+//         'meta_title' => $title,
+//         'meta_description' => $teaser,
+//     ]);
+// });
 
 Route::get('users_statis', function () {
     $users = [

@@ -52,4 +52,11 @@ class UserController extends Controller
     {
         return view("users.create");
     }
+
+    public function store(Request $request)
+    {
+        // dd($request->only('name', 'email', 'password'));
+        User::create($request->only('name', 'email', 'password'));
+        return redirect('/users');
+    }
 }

@@ -28,6 +28,7 @@
                     <x-table.th>created at</x-table.th>
                     <x-table.th>at</x-table.th>
                     <x-table.th>created at</x-table.th>
+                    <x-table.th></x-table.th>
                 </tr>
             </x-table.thead>
             <x-table.tbody>
@@ -41,6 +42,12 @@
                         <x-table.td>{{ $user->created_at->format('d M Y') }}</x-table.td>
                         <x-table.td>{{ $user->created_at->diffForHumans() }} </x-table.td>
                         <x-table.td>{{ (new \Carbon\Carbon($user->created_at))->format('d F Y') }}</x-table.td>
+                        <x-table.td>
+                            <div class="flex justify-end gap-x-2">
+                                <a href="/users/{{ $user->id }}" class="hover:underline">View</a>
+                                <a href="/users/{{ $user->id }}/edit" class="hover:underline">Edit</a>
+                            </div>
+                        </x-table.td>
                     </tr>
                 @endforeach
             </x-table.tbody>

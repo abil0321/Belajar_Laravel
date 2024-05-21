@@ -56,7 +56,7 @@ class UserController extends Controller
             'page_meta' => [
                 'title' => 'Create new User',
                 'method' => 'post',
-                'url' => '/users',
+                'url' => route('users.store'),
                 'submit_text' => 'Save',
             ],
         ]);
@@ -77,7 +77,8 @@ class UserController extends Controller
         // ]);
         // User::create($request->validate($this->requestvalidated()));
         User::create($request->validated());
-        return redirect('/users');
+        // return redirect('/users');
+        return to_route('users.index');
     }
 
     // public function show($id)
@@ -104,7 +105,7 @@ class UserController extends Controller
             'page_meta' => [
                 'title' => 'Edit User: ' . $user->name,
                 'method' => 'put',
-                'url' => '/users/' . $user->id,
+                'url' => route('users.update', $user),
                 'submit_text' => 'Update',
             ],
         ]);
@@ -120,7 +121,8 @@ class UserController extends Controller
         // dd('updated');
         // $user->update($request->validate($this->requestvalidated()));
         $user->update($request->validated());
-        return redirect('/users');
+        // return redirect('/users');
+        return to_route('users.index');
     }
 
     // protected function requestvalidated(): array
@@ -136,6 +138,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect('users');
+        // return redirect(route('users.index'));
+        return to_route('users.index');
     }
 }

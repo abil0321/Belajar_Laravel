@@ -13,7 +13,7 @@
             </x-slot>
         </x-section-title>
         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <x-button as="a" href="/users/create" class="bg-red-500" type="button">
+            <x-button as="a" href="{{ route('users.create') }}" class="bg-red-500" type="button">
                 Add user
             </x-button>
         </div>
@@ -44,8 +44,8 @@
                         <x-table.td>{{ (new \Carbon\Carbon($user->created_at))->format('d F Y') }}</x-table.td>
                         <x-table.td>
                             <div class="flex justify-end gap-x-2">
-                                <a href="/users/{{ $user->id }}" class="hover:underline">View</a>
-                                <a href="/users/{{ $user->id }}/edit" class="hover:underline">Edit</a>
+                                <a href="{{ route('users.show', $user->id) }}" class="hover:underline">View</a>
+                                <a href="{{ route('users.edit', $user->id) }}" class="hover:underline">Edit</a>
                             </div>
                         </x-table.td>
                     </tr>

@@ -12,7 +12,7 @@
         </x-section-title>
     </div>
 
-    <form action="/users/{{ $user->id }}" method="post">
+    <form action="{{ route('users.destroy', $user->id) }}" method="post">
         @method('DELETE')
         @csrf
         <x-button type="submit" class="mt-5">

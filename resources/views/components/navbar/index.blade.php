@@ -10,7 +10,7 @@
                     <div class="ml-10 flex items-baseline space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
-                        <x-navbar.link href="/users">Users</x-navbar.link>
+                        <x-navbar.link href="{{ route('users.index') }}">Users</x-navbar.link>
                         <x-navbar.link href="/home">Home</x-navbar.link>
                         <x-navbar.link href="/about">About</x-navbar.link>
                         <x-navbar.link href="/contact">Contact</x-navbar.link>
@@ -86,7 +86,7 @@
     <div class="md:hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <x-navbar.mobile-link href="/users" aria-current="page">Users</x-navbar.mobile-link>
+            <x-navbar.mobile-link href="{{ route('users.index') }}" aria-current="page">Users</x-navbar.mobile-link>
             <x-navbar.mobile-link href="/home">Home</x-navbar.mobile-link>
             <x-navbar.mobile-link href="/about">About</x-navbar.mobile-link>
             <x-navbar.mobile-link href="/galeri">Gallery</x-navbar.mobile-link>

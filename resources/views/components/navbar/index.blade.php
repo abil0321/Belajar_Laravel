@@ -1,3 +1,4 @@
+{{-- @use('\Illuminate\Support\Facades\Auth') --}}
 <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
@@ -10,11 +11,28 @@
                     <div class="ml-10 flex items-baseline space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
-                        <x-navbar.link href="{{ route('users.index') }}">Users</x-navbar.link>
+                        @auth
+                            <x-navbar.link href="{{ route('users.index') }}">Users</x-navbar.link>
+                        @endauth
                         <x-navbar.link href="/home">Home</x-navbar.link>
                         <x-navbar.link href="/about">About</x-navbar.link>
                         <x-navbar.link href="/contact">Contact</x-navbar.link>
                         <x-navbar.link href="/galeri">Gallery</x-navbar.link>
+
+                        @auth
+                            <x-navbar.link href="#">
+                                {{-- {{ Auth::user()->name }} --}}
+                                {{ auth()->user()->name }}
+                            </x-navbar.link>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <x-button type="submit">
+                                    Log Out
+                                </x-button>
+                            </form>
+                        @else
+                            <x-navbar.link href="{{ route('login') }}">Login</x-navbar.link>
+                        @endauth
                     </div>
                 </div>
             </div>

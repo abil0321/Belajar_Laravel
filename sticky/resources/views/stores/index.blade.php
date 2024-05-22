@@ -11,10 +11,17 @@
     </x-slot>
 
     <x-container>
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900">
-                {{ __("You're logged in!") }}
-            </div>
+        <div style="border: 1px solid red;" class="flex flex-wrap gap-6">
+            @foreach ($stores as $store)
+                <x-card class="p-6" style="width: 25%">
+                    <img src="{{ Storage::url($store->logo) }}" alt="{{ $store->name }}" class="px-7 rounded-lg"
+                        class="size-16 rounded-lg">
+                    <h2>{{ $store->name }}</h2>
+                    <x-card.description>
+                        {{ $store->description }}
+                    </x-card.description>
+                </x-card>
+            @endforeach
         </div>
     </x-container>
 </x-app-layout>

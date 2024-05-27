@@ -8,6 +8,7 @@
 
     <title>{{ isset($title) ? $title . ' / ' . config('app.name', ' Laravel') : config('app.name', ' Laravel') }}
     </title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

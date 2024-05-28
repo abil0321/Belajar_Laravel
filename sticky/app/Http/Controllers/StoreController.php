@@ -31,6 +31,17 @@ class StoreController extends Controller
     //     // new Controllers\Middleware('auth', only: ['index']);
     //     // new Controllers\Middleware('auth', except: ['index']);
     // }
+
+    public function list()
+    {
+        $stores = Store::query()
+            ->latest()
+            ->paginate(10);
+
+        return view('stores.list', [
+            'stores' => $stores
+        ]);
+    }
     public function index()
     {
         $store = Store::query()

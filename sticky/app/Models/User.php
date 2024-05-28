@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\HasRoles;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -53,15 +55,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Store::class);
     }
 
-    public function roles(): BelongsToMany
-    {
-        // return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
-        return $this->belongsToMany(Role::class, 'user_role');
-    }
+    // public function roles(): Relations\BelongsToMany
+    // {
+    //     // return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
+    //     return $this->belongsToMany(Role::class, 'user_role');
+    // }
 
-    public function assignRole(Role $role): Model
-    {
-        // return $this->roles()->attach($role); // attach untuk memasukkan multiple ID
-        return $this->roles()->save($role);
-    }
+    // public function assignRole(Role $role): Model
+    // {
+    //     // return $this->roles()->attach($role); // attach untuk memasukkan multiple ID
+    //     return $this->roles()->save($role);
+    // }
+
 }

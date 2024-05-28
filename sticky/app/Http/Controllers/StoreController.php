@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StoreStatus;
 use App\Http\Requests\StoreRequest;
 use App\Models\Store;
 use Illuminate\Auth\Middleware\Authenticate;
@@ -23,10 +24,22 @@ class StoreController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public static function middleware()
+    // {
+    //     // return ['auth'];
+
+    //     // new Controllers\Middleware('auth', only: ['index']);
+    //     // new Controllers\Middleware('auth', except: ['index']);
+    // }
     public function index()
     {
+        $store = Store::query()
+            ->where('status', StoreStatus::ACTIVE)
+            ->latest()
+            ->get();
         return view("stores.index", [
-            'stores' => Store::latest()->get(),
+            // 'stores' => Store::latest()->get(),
+            'stores' => $store,
         ]);
     }
 

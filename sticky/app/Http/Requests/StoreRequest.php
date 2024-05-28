@@ -21,7 +21,7 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        // dd($this->method());
+        // dd($this->method()); // $this->method() identifier
         return [
             'logo' => [$this->method() === 'POST' ? 'required' : '', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'name' => ['required', 'string', 'min:3', 'max:255'],

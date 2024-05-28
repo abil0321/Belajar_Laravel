@@ -26,7 +26,6 @@ class AppServiceProvider extends ServiceProvider
         // Gate::define('update-store', function (User $user, Store $store) {
         //     return $user->id === $store->user_id;
         // });
-
         Gate::policy(Store::class, StorePolicy::class);
     }
 }

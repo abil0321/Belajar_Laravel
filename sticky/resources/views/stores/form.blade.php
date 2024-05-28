@@ -2,13 +2,15 @@
     {{-- <x-slot name="title">
         Stores
     </x-slot> --}}
-    @slot('title', $meta_page['title'])
+    @slot('title ', $meta_page['title'])
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ $meta_page['title'] }}
         </h2>
     </x-slot>
+
+    {{-- @dd($store) --}}
 
     <x-container>
         <x-card class="max-w-2xl">

@@ -44,7 +44,7 @@
                     </div>
                     <br>
                     <x-primary-button>
-                        Update
+                        {{ $meta_page['text-btn'] }}
                     </x-primary-button>
                 </form>
             </x-card.content>

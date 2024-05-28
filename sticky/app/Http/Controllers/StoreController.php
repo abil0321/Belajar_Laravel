@@ -5,17 +5,22 @@ namespace App\Http\Controllers;
 use App\Enums\StoreStatus;
 use App\Http\Requests\StoreRequest;
 use App\Models\Store;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
-// use Illuminate\Routing\Controllers;
-// use Illuminate\Support\Facades\File;
-// use Illuminate\Support\Facades\Storage;
-
-class StoreController extends Controller
 // class StoreController extends Controller implements Controllers\HasMiddleware
+class StoreController extends Controller
 {
+    // public static function middleware()
+    // {
+    //     return [
+    //         new Controllers\Middleware('auth', except: ['index']),
+    //     ];
+    // }
     /**
      * Display a listing of the resource.
      */
@@ -46,13 +51,16 @@ class StoreController extends Controller
         // if (!auth()->check()) {
         //     return to_route('login');
         // }
+
+        $store = new Store();
         return view("stores.form", [
-            'store' => new Store(),
+            'store' => $store,
             'meta_page' => [
                 'title' => 'Create Store',
-                'description' => 'Create store : ',
-                'url' => route('stores.store'),
-                'method' => 'POST'
+                'description' => 'Create new Store',
+                'method' => 'POST',
+                'text-btn' => 'Create',
+                'url' => route('stores.store')
             ]
         ]);
     }
@@ -63,6 +71,9 @@ class StoreController extends Controller
     public function store(StoreRequest $request)
     {
         // dd($request->file('logo'));
+        // if (!auth()->check()) {
+        //     return to_route('login');
+        // }
         $file = $request->file('logo');
         $request->user()->stores()->create([
             ...$request->validated(),
@@ -83,18 +94,20 @@ class StoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Store $store, Request $request)
+    public function edit(Request $request, Store $store)
     {
-        // cara untuk membatasi edit hanya untuk pemilik/pembuat(user) store nya saja yang bisa edit
-        // abort_if($request->user()->isNot($store->user), 401, 'Lu ga punya hak buat edit punya orang tot');
+        // abort_if($request->user()->isNot($store->user), 401);
+        // Gate::authorize('update-store', $store);
         Gate::authorize('update', $store);
+
         return view('stores.form', [
             'store' => $store,
             'meta_page' => [
                 'title' => 'Edit Store',
-                'description' => 'Edit store : ' . $store->name,
-                'url' => route('stores.update', $store->id),
-                'method' => 'PUT'
+                'description' => 'Edit Store: ' . $store->name,
+                'method' => 'PUT',
+                'text-btn' => 'update',
+                'url' => route('stores.update', $store)
             ]
         ]);
     }
@@ -104,17 +117,9 @@ class StoreController extends Controller
      */
     public function update(StoreRequest $request, Store $store)
     {
-        if ($request->hasFile('logo')) {
-            Storage::delete($store->logo);
-            $file = $request->file('logo');
-        } else {
-            $file = $store->logo;
-        }
-
         $store->update([
             'name' => $request->name,
             'description' => $request->description,
-            'logo' => $file->store('images/stores'),
         ]);
 
         return to_route('stores.index');

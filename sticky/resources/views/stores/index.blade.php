@@ -11,16 +11,26 @@
     </x-slot>
 
     <x-container>
-        <div style="border: 1px solid red;" class="flex flex-wrap gap-6">
+        <div style="border: 1px solid red;" class="grid grid-cols-4 gap-6">
             @foreach ($stores as $store)
-                <x-card class="p-6" style="width: 25%">
-                    <img src="{{ Storage::url($store->logo) }}" alt="{{ $store->name }}" class="px-7 rounded-lg"
-                        class="size-16 rounded-lg">
+            <x-card class="p-6">
+                <img src="{{ Storage::url($store->logo) }}" alt="{{ $store->name }}" class="px-7 rounded-lg"
+                    class="size-16 rounded-lg">
+                <x-card.header>
                     <h2>{{ $store->name }}</h2>
-                    <x-card.description>
-                        {{ $store->description }}
-                    </x-card.description>
-                </x-card>
+                </x-card.header>
+                <x-card.description>
+                    {{ $store->description }}
+                </x-card.description>
+                {{-- @dd(auth()->user()->id) --}}
+                @auth
+                @if ($store->user_id === auth()->user()->id)
+                <a href="{{ route('stores.edit', $store) }}" class="underline text-blue-600 px-8">
+                    Edit
+                </a>
+                @endif
+                @endauth
+            </x-card>
             @endforeach
         </div>
     </x-container>

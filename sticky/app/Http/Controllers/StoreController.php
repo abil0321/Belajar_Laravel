@@ -4,12 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRequest;
 use App\Models\Store;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
+// class StoreController extends Controller implements Controllers\HasMiddleware
 class StoreController extends Controller
 {
+    // public static function middleware()
+    // {
+    //     return [
+    //         new Controllers\Middleware('auth', except: ['index']),
+    //     ];
+    // }
     /**
      * Display a listing of the resource.
      */
@@ -25,7 +35,21 @@ class StoreController extends Controller
      */
     public function create()
     {
-        return view("stores.create");
+        // if (!auth()->check()) {
+        //     return to_route('login');
+        // }
+
+        $store = new Store();
+        return view("stores.form", [
+            'store' => $store,
+            'meta_page' => [
+                'title' => 'Create Store',
+                'description' => 'Create new Store',
+                'method' => 'POST',
+                'text-btn' => 'Create',
+                'url' => route('stores.store')
+            ]
+        ]);
     }
 
     /**
@@ -34,6 +58,9 @@ class StoreController extends Controller
     public function store(StoreRequest $request)
     {
         // dd($request->file('logo'));
+        // if (!auth()->check()) {
+        //     return to_route('login');
+        // }
         $file = $request->file('logo');
         $request->user()->stores()->create([
             ...$request->validated(),
@@ -54,17 +81,35 @@ class StoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Store $store)
+    public function edit(Request $request, Store $store)
     {
-        //
+        // abort_if($request->user()->isNot($store->user), 401);
+        // Gate::authorize('update-store', $store);
+        Gate::authorize('update', $store);
+
+        return view('stores.form', [
+            'store' => $store,
+            'meta_page' => [
+                'title' => 'Edit Store',
+                'description' => 'Edit Store: ' . $store->name,
+                'method' => 'PUT',
+                'text-btn' => 'update',
+                'url' => route('stores.update', $store)
+            ]
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Store $store)
+    public function update(StoreRequest $request, Store $store)
     {
-        //
+        $store->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+        return to_route('stores.index');
     }
 
     /**

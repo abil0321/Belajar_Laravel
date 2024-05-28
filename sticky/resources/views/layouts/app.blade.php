@@ -11,6 +11,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
@@ -23,11 +24,11 @@
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white shadow" style="margin-bottom: 20px">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+        <header class="bg-white shadow" style="margin-bottom: 20px">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
         @endif
 
         <!-- Page Content -->

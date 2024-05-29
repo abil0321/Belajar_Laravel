@@ -36,7 +36,7 @@ class StoreController extends Controller
     {
         $stores = Store::query()
             ->latest()
-            ->paginate(10);
+            ->paginate(8);
 
         return view('stores.list', [
             'stores' => $stores
@@ -136,9 +136,16 @@ class StoreController extends Controller
      */
     public function update(StoreRequest $request, Store $store)
     {
+        if ($request->hasFile('logo')) {
+            Storage::delete($store->logo);
+            $file = $request->file('logo')->store('logo');
+        } else {
+            $file = $store->logo;
+        }
         $store->update([
             'name' => $request->name,
             'description' => $request->description,
+            'logo' => $file,
         ]);
 
         return to_route('stores.index');

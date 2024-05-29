@@ -15,17 +15,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @if (isset($header))
-        <header class="bg-white shadow" style="margin-bottom: 20px">
+        <header class="bg-zinc-900 border-b border-zinc-800 shadow mb-6 lg:mb-12" style="margin-bottom: 20px">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
@@ -37,6 +38,8 @@
             {{ $slot }}
         </main>
     </div>
+    {{-- @include('layouts.footer') --}}
+    <x-footer />
 </body>
 
 </html>

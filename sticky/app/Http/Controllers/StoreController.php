@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Enums\StoreStatus;
 use App\Http\Requests\StoreRequest;
 use App\Models\Store;
-use Illuminate\Auth\Middleware\Authenticate;
+// use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers;
-use Illuminate\Support\Facades\File;
+// use Illuminate\Routing\Controllers;
+// use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,6 +49,18 @@ class StoreController extends Controller
         $store->save();
 
         return back();
+    }
+
+    public function mine(Request $request)
+    {
+        $stores = Store::query()
+            ->where('user_id', $request->user()->id)
+            ->latest()
+            ->paginate(8);
+
+        return view('stores.mine', [
+            'stores' => $stores
+        ]);
     }
     public function index()
     {

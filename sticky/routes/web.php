@@ -10,6 +10,7 @@ Route::get('/dashboard', Controllers\DashboardController::class)->middleware(['a
 // Route::resource('stores', Controllers\StoreController::class);
 Route::get('stores', [Controllers\StoreController::class, 'index'])->name('stores.index');
 
+
 // Route::get('stores/list', [Controllers\StoreController::class, 'list'])->name('stores.list')->middleware('role:admin');
 // Route::get('stores/list', [Controllers\StoreController::class, 'list'])->name('stores.list')->middleware(HasRoleAdminMiddleware::class);
 
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('verified')->group(function () {
+        Route::get('stores/mine', [Controllers\StoreController::class, 'mine'])->name('stores.mine');
         Route::resource('stores', Controllers\StoreController::class)->except('index');
     });
 

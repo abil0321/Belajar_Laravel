@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(HasRoleAdminMiddleware::class)->group(function () {
         Route::get('stores/list', [Controllers\StoreController::class, 'list'])->name('stores.list');
+        Route::put('stores/approve/{store}', [Controllers\StoreController::class, 'approve'])->name('stores.approve');
     });
 
     Route::middleware('verified')->group(function () {

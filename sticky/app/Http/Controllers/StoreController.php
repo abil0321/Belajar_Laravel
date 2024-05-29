@@ -42,6 +42,14 @@ class StoreController extends Controller
             'stores' => $stores
         ]);
     }
+
+    public function approve(Store $store)
+    {
+        $store->status = StoreStatus::ACTIVE;
+        $store->save();
+
+        return back();
+    }
     public function index()
     {
         $store = Store::query()

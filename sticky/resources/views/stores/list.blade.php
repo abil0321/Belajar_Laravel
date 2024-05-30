@@ -15,7 +15,7 @@
     <x-container>
         <div class="grid grid-cols-4 gap-6">
             @foreach ($stores as $store)
-            <x-card>
+            {{-- <x-card>
                 <x-card.header>
                     <x-card.title>
                         {{ $store->name }}
@@ -65,7 +65,8 @@
                     </section>
 
                 </x-card.content>
-            </x-card>
+            </x-card> --}}
+            <x-stores.item :$store />
             @endforeach
         </div>
         <div class="my-5">
